@@ -73,7 +73,7 @@ async def need_help(message: types.Message):
     else:
         await Form.question.set()
         answer_message = (
-            'Here you can describe youre problem.\n'
+            'Here you can describe your problem.\n'
         'Please indicate your OS and technology with which your question is related, so that the helpers can help you faster.\n'
         'For example: MacOS / Django'
         )
@@ -86,11 +86,11 @@ async def take_question(message: types.Message, state: FSMContext):
     try:
         question = db_logic.add_question(message)
         answer_message = (
-            'Bot add youre question:'
+            'Bot add your question:'
             '\n---------------------------------------\n'
             f'{question}'
             '\n---------------------------------------\n'
-            'Optional, here you can upload screenshot of youre question\n'
+            'Optional, here you can upload screenshot of your question\n'
             "That's speed up finding the answer of question"
             )
         markup = markup_5
@@ -106,7 +106,7 @@ async def take_photo(message: types.Message, state: FSMContext):
     path = f'./media/{message.chat.id}.jpg'
     await message.photo[-1].download(destination_file=path)
     answer_message = (
-        'Successful upload youre screenshot! Thanks for screenshot!'
+        'Successful upload your screenshot! Thanks for screenshot!'
     )
     markup = markup_main_menu
     await message.answer(answer_message, reply_markup=markup)
@@ -117,7 +117,7 @@ async def take_photo(message: types.Message, state: FSMContext):
 async def delete_question(message: types.Message):
     db_logic.delete_question(message.chat.id)
     db_logic.delete_photo(message.chat.id)
-    await message.answer('Youre question has been deleted',reply_markup=markup_main_menu)
+    await message.answer('your question has been deleted',reply_markup=markup_main_menu)
 
 
 @dp.message_handler(text='Can help')

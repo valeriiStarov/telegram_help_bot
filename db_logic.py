@@ -84,7 +84,7 @@ def choose_one_question(number) -> str:
     except IndexError:
         raise exceptions.OutOfQuestions(
             f"You have viewed all {number-1} questions! You awesome!\n"
-            "You can watch them again, if you want change youre choice.\n"
+            "You can watch them again, if you want change your choice.\n"
             "For that you need to run - /Can_Help\n"
             "Good luck!\n"
         )
