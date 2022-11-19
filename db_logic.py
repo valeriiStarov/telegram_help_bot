@@ -78,7 +78,7 @@ def choose_one_question(number) -> str:
         )
     result = []
     for c in count:
-        result.insert(0, c)
+        result.append(c)
     try:
         result[number-1]
     except IndexError:
