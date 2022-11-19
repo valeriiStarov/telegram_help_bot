@@ -117,7 +117,7 @@ async def take_photo(message: types.Message, state: FSMContext):
 async def delete_question(message: types.Message):
     db_logic.delete_question(message.chat.id)
     db_logic.delete_photo(message.chat.id)
-    await message.answer('your question has been deleted',reply_markup=markup_main_menu)
+    await message.answer('Your question has been deleted',reply_markup=markup_main_menu)
 
 
 @dp.message_handler(text='Can help')
@@ -165,14 +165,15 @@ async def next_question(message: types.Message):
         )
         markup = markup_2
 
-        if await db_logic.get_photo(
+        try:
+            await db_logic.get_photo(
                                     message.chat.id,
                                     question[0],
                                     answer_message,
                                     markup
-                                   ):
-            return True
-        else:
+                                   )
+
+        except Exception:
             await message.answer(answer_message, reply_markup=markup) 
         
 
