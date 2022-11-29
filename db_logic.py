@@ -36,7 +36,7 @@ def add_question(message) -> Question:
             "Question can't start with '/'\n"
             "Try starting with a different character."
             )
-    if text == buttons.btn_7.text:
+    if text == buttons.btn_main_menu.text:
         raise exceptions.MainMenuQuestion(
             'You returned in main menu\n'
         )
