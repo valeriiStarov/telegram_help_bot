@@ -10,6 +10,7 @@ cursor = conn.cursor()
 
 
 def insert(table: str, column_values: Dict):
+    """Добавление в БД"""
     columns = ', '.join( column_values.keys() )
     values = [tuple(column_values.values())]
     placeholders = ", ".join( "?" * len(column_values.keys()) )
@@ -22,6 +23,7 @@ def insert(table: str, column_values: Dict):
 
 
 def upp_helper_counter(user_id):
+    """Увеличивает счетчик для helper'a на один"""
     cursor.execute(
         "SELECT counter FROM helper "
         f"WHERE user_id = '{user_id}'"
@@ -43,6 +45,7 @@ def upp_helper_counter(user_id):
 
 
 def refresh_helper_counter(user_id):
+    """Сбрасывает счетчик"""
     cursor.execute(
         f"UPDATE helper "
         f"SET counter = 0 "
@@ -52,6 +55,7 @@ def refresh_helper_counter(user_id):
 
 
 def fetchall(table: str, columns: List[str]) -> List[Tuple]:
+    """Выбор всего из таблицы"""
     columns_joined = ", ".join(columns)
     cursor.execute(f"SELECT {columns_joined} FROM {table}")
     rows = cursor.fetchall()
@@ -65,12 +69,14 @@ def fetchall(table: str, columns: List[str]) -> List[Tuple]:
 
 
 def delete(table: str, column: str, id: int) -> None:
+    """Удаление из таблицы"""
     id = int(id)
     cursor.execute(f"delete from {table} where {column} = {id}")
     conn.commit()
 
 
 def get_cursor():
+    """Возвращает курсор для удобства работы в db_logic.py"""
     return cursor
 
 

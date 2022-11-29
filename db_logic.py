@@ -138,6 +138,7 @@ def add_helper(user_id, counter) -> Helper:
 
 
 def get_photo(chat_id, user_id, caption, markup):
+    """Выдает фото вопроса если оно есть"""
     # user_id - id автора вопроса
     path = f'./media/{user_id}.jpg'
     dp = get_dp()
@@ -154,6 +155,7 @@ def get_photo(chat_id, user_id, caption, markup):
 
 
 def delete_photo(user_id) -> None:
+    """Удаляет фото"""
     path = f'./media/{user_id}.jpg'
     try:
         return os.remove(path)
