@@ -57,7 +57,7 @@ async def need_help(message: types.Message):
             'If you want to write new question, you need to delete active question\n'
             # question[1] - текст вопроса
         )
-        markup = markup_3
+        markup = markup_if_have_question_menu
 
         try:
             await db_logic.get_photo(
@@ -77,7 +77,7 @@ async def need_help(message: types.Message):
         'Please indicate your OS and technology with which your question is related, so that the helpers can help you faster.\n'
         'For example: MacOS / Django'
         )
-        markup = markup_4
+        markup = markup_if_no_question_menu
         await message.answer(answer_message, reply_markup=markup,)
 
 
@@ -93,7 +93,7 @@ async def take_question(message: types.Message, state: FSMContext):
             'Optional, here you can upload screenshot of your question\n'
             "That's speed up finding the answer of question"
             )
-        markup = markup_5
+        markup = markup_skip_upload_photo
     except Exception as e:
         answer_message = (f'{e}')
         markup = markup_main_menu
@@ -133,7 +133,7 @@ async def can_help(message: types.Message):
         answer_message = (
         f'Question # {int(number)}:\n{question[1]}'
         )
-        markup = markup_2
+        markup = markup_help_menu
 
         try:
             await db_logic.get_photo(
@@ -163,7 +163,7 @@ async def next_question(message: types.Message):
         answer_message = (
         f'Question # {int(number)}:\n{question[1]}'
         )
-        markup = markup_2
+        markup = markup_help_menu
 
         try:
             await db_logic.get_photo(
@@ -196,7 +196,7 @@ async def go_to_help(message: types.Message):
         f'<a href="tg://user?id={question[0]}">Author</a> of question'
         )
         
-        markup = markup_2
+        markup = markup_help_menu
 
     except exceptions.NotCorrectMessage as e:
         answer_message = (f'{e}')
